@@ -30,6 +30,8 @@ print("Received connection from: {}".format(addr))
 print(type(addr))
 
 
+
+
 def proxy_manage():
 
     # dynamic_server, addr = dynamic.accept()
@@ -47,8 +49,9 @@ def proxy_manage():
     dynamic_server.setblocking(False)
     proxy_client.setblocking(False)
     buffer_size = 8192
+    def t():
 
-    while True:
+     while True:
 
         try:
             # print('hiii')
@@ -61,6 +64,8 @@ def proxy_manage():
         except socket.error:
             pass
 
+    def t2():
+     while True:
         try:
             data = dynamic_server.recv(buffer_size)
             if data:
@@ -70,8 +75,12 @@ def proxy_manage():
         except socket.error:
             pass
 
-    dynamic_server.close()
-    proxy_client.close()
+    thread1 = threading.Thread(target=t).start()
+    thread2 = threading.Thread(target=t2).start()
+
+
+    # dynamic_server.close()
+    # proxy_client.close()
 
 
 # while True:
